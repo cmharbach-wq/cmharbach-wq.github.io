@@ -3,81 +3,188 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mental Wellness Check-In — Are You More Than Okay?</title>
+  <title>Wellness Check-In · More Than Okay</title>
   <style>
-    /* ── Fonts ── */
-    @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:wght@400;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;700;800&display=swap');
 
-    /* ── Variables ── */
     :root {
-      --purple:      #6b4e9b;
-      --soft-purple: #9b7ecb;
-      --mint:        #4ecdc4;
-      --dark:        #2d2040;
-      --text:        #3d3453;
-      --lavender:    #f0ebff;
-      --white:       #fff;
-      --shadow:      rgba(107,78,155,0.15);
+      --ink:           #13102a;
+      --plum:          #2d2040;
+      --purple:        #6b4e9b;
+      --soft-purple:   #9b7ecb;
+      --mint:          #4ecdc4;
+      --mint-deep:     #2faaa1;
+      --cream:         #fdfbf7;
+      --lavender:      #f4efff;
+      --text-body:     #3d3453;
+      --text-muted:    #7a718f;
+      --border-soft:   rgba(107, 78, 155, 0.12);
+      --shadow-soft:   0 6px 24px rgba(45, 32, 64, 0.08);
+      --shadow-lift:   0 16px 44px rgba(45, 32, 64, 0.14);
     }
 
-    /* ── Reset & base ── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+    html { scroll-behavior: smooth; }
+
     body {
-      font-family: 'Lato', sans-serif;
+      font-family: 'Inter', -apple-system, sans-serif;
       background: var(--lavender);
       background-image:
         radial-gradient(ellipse at 10% 0%, rgba(155,126,203,0.22) 0%, transparent 55%),
         radial-gradient(ellipse at 90% 100%, rgba(78,205,196,0.18) 0%, transparent 55%);
       background-attachment: fixed;
-      color: var(--text);
+      color: var(--text-body);
       min-height: 100vh;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
     }
 
-    a { color: var(--purple); font-weight: 600; }
-    a:hover { color: var(--mint); }
+    a { color: var(--purple); font-weight: 600; text-decoration: none; transition: color 0.2s; }
+    a:hover { color: var(--mint-deep); }
 
-    /* ── Header ── */
+    /* =========== NAV =========== */
+    .top-nav {
+      background: rgba(253, 251, 247, 0.85);
+      backdrop-filter: saturate(180%) blur(14px);
+      -webkit-backdrop-filter: saturate(180%) blur(14px);
+      border-bottom: 1px solid var(--border-soft);
+      padding: 14px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .top-nav .nav-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      color: var(--ink);
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .top-nav .nav-brand::before {
+      content: "";
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--purple), var(--mint));
+      display: inline-block;
+    }
+    .top-nav .nav-links {
+      display: flex;
+      gap: 6px;
+      list-style: none;
+      flex-wrap: wrap;
+    }
+    .top-nav .nav-links a {
+      color: var(--text-body);
+      font-size: 0.93rem;
+      font-weight: 500;
+      padding: 8px 16px;
+      border-radius: 20px;
+      transition: all 0.2s ease;
+      display: inline-block;
+    }
+    .top-nav .nav-links a:hover {
+      color: var(--purple);
+      background: rgba(107, 78, 155, 0.08);
+    }
+    .top-nav .nav-links a.active {
+      color: var(--purple);
+      background: rgba(107, 78, 155, 0.10);
+    }
+
+    /* =========== HERO =========== */
     .quiz-header {
-      background: linear-gradient(135deg, var(--dark) 0%, var(--purple) 60%, var(--soft-purple) 100%);
+      position: relative;
+      background: linear-gradient(135deg, var(--ink) 0%, var(--plum) 55%, var(--purple) 100%);
       color: #fff;
       text-align: center;
-      padding: 70px 24px 60px;
+      padding: 80px 24px 70px;
+      overflow: hidden;
+    }
+    .quiz-header::before,
+    .quiz-header::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .quiz-header::before {
+      width: 320px;
+      height: 320px;
+      top: -100px;
+      right: -60px;
+      background: radial-gradient(circle, rgba(78,205,196,0.28), transparent 70%);
+    }
+    .quiz-header::after {
+      width: 240px;
+      height: 240px;
+      bottom: -60px;
+      left: -40px;
+      background: radial-gradient(circle, rgba(155,126,203,0.28), transparent 70%);
+    }
+    .quiz-header .eyebrow {
+      display: inline-block;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--mint);
+      padding: 6px 16px;
+      border: 1px solid rgba(78, 205, 196, 0.4);
+      border-radius: 20px;
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 1;
     }
     .quiz-header h1 {
       font-family: 'Playfair Display', serif;
-      font-size: 2.8rem;
-      font-weight: 700;
+      font-size: clamp(2.1rem, 4vw, 3rem);
+      font-weight: 800;
       color: #fff;
+      letter-spacing: -0.02em;
+      position: relative;
+      z-index: 1;
     }
     .quiz-header p {
-      font-size: 1.1rem;
-      opacity: 0.88;
-      max-width: 540px;
+      font-size: 1.08rem;
+      opacity: 0.86;
+      max-width: 560px;
       margin: 14px auto 0;
       line-height: 1.65;
+      position: relative;
+      z-index: 1;
     }
     .back-link {
       display: inline-block;
-      margin-top: 20px;
+      margin-top: 22px;
       color: var(--mint);
       font-size: 0.9rem;
       font-weight: 600;
+      position: relative;
+      z-index: 1;
     }
     .back-link:hover { color: #fff; }
 
-    /* ── Main container ── */
+    /* =========== QUIZ BODY =========== */
     .quiz-container {
-      max-width: 700px;
+      max-width: 720px;
       margin: 0 auto;
       padding: 48px 24px 80px;
     }
 
-    /* ── Progress bar ── */
     .progress-wrap {
-      background: #ddd;
+      background: rgba(107, 78, 155, 0.14);
       border-radius: 10px;
-      height: 10px;
+      height: 8px;
       margin-bottom: 32px;
       overflow: hidden;
     }
@@ -89,19 +196,21 @@
       width: 0%;
     }
     .progress-label {
-      font-size: 0.85rem;
-      color: var(--soft-purple);
-      margin-bottom: 6px;
-      font-weight: 600;
+      font-size: 0.78rem;
+      color: var(--mint-deep);
+      margin-bottom: 8px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
       text-align: right;
     }
 
-    /* ── Question card ── */
     .question-card {
-      background: var(--white);
-      border-radius: 18px;
-      padding: 36px 40px;
-      box-shadow: 0 8px 32px var(--shadow);
+      background: #fff;
+      border: 1px solid var(--border-soft);
+      border-radius: 22px;
+      padding: 40px 44px;
+      box-shadow: var(--shadow-lift);
       animation: fadeUp 0.4s ease both;
     }
 
@@ -111,23 +220,24 @@
     }
 
     .question-number {
-      font-size: 0.78rem;
+      font-size: 0.74rem;
       font-weight: 700;
-      letter-spacing: 2px;
+      letter-spacing: 2.5px;
       text-transform: uppercase;
       color: var(--soft-purple);
-      margin-bottom: 10px;
+      margin-bottom: 12px;
     }
 
     .question-text {
       font-family: 'Playfair Display', serif;
-      font-size: 1.3rem;
-      color: var(--dark);
-      margin-bottom: 28px;
-      line-height: 1.5;
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: var(--ink);
+      margin-bottom: 30px;
+      line-height: 1.4;
+      letter-spacing: -0.01em;
     }
 
-    /* ── Options ── */
     .options-list {
       list-style: none;
       display: flex;
@@ -138,15 +248,16 @@
     .option-btn {
       background: var(--lavender);
       border: 2px solid transparent;
-      border-radius: 12px;
-      padding: 14px 20px;
-      font-family: 'Lato', sans-serif;
-      font-size: 1rem;
-      color: var(--text);
+      border-radius: 14px;
+      padding: 15px 22px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.98rem;
+      color: var(--text-body);
       cursor: pointer;
       text-align: left;
       transition: background 0.2s, border-color 0.2s, transform 0.15s;
       width: 100%;
+      font-weight: 500;
     }
     .option-btn:hover {
       background: rgba(107,78,155,0.1);
@@ -156,80 +267,85 @@
     .option-btn.selected {
       background: rgba(107,78,155,0.14);
       border-color: var(--purple);
-      color: var(--dark);
+      color: var(--ink);
       font-weight: 700;
     }
     .option-btn .option-emoji {
-      margin-right: 10px;
-      font-size: 1.1rem;
+      margin-right: 12px;
+      font-size: 1.15rem;
     }
 
-    /* ── Navigation buttons ── */
     .nav-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-top: 28px;
+      margin-top: 32px;
       gap: 12px;
     }
 
     .btn {
       padding: 12px 32px;
       border-radius: 40px;
-      font-family: 'Lato', sans-serif;
-      font-size: 1rem;
-      font-weight: 700;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.96rem;
+      font-weight: 600;
       cursor: pointer;
       border: none;
-      transition: transform 0.15s, background 0.2s;
+      transition: transform 0.15s, background 0.2s, box-shadow 0.2s;
     }
     .btn:hover { transform: translateY(-2px); }
-    .btn:active { transform: translateY(0); }
     .btn-next {
-      background: linear-gradient(135deg, var(--purple), var(--soft-purple));
+      background: var(--ink);
       color: #fff;
       margin-left: auto;
+    }
+    .btn-next:hover {
+      background: var(--purple);
+      box-shadow: 0 10px 22px rgba(107,78,155,0.25);
     }
     .btn-back {
       background: rgba(107,78,155,0.12);
       color: var(--purple);
     }
+    .btn-back:hover { background: rgba(107,78,155,0.18); }
     .btn:disabled {
-      opacity: 0.45;
+      opacity: 0.4;
       cursor: not-allowed;
       transform: none;
     }
 
-    /* ── Results ── */
     #results-screen { display: none; }
 
     .result-card {
-      background: var(--white);
-      border-radius: 18px;
-      padding: 44px 40px;
-      box-shadow: 0 8px 32px var(--shadow);
+      background: #fff;
+      border: 1px solid var(--border-soft);
+      border-radius: 22px;
+      padding: 48px 42px;
+      box-shadow: var(--shadow-lift);
       text-align: center;
       animation: fadeUp 0.5s ease both;
     }
 
     .result-emoji {
       font-size: 4rem;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
       display: block;
     }
 
     .result-title {
       font-family: 'Playfair Display', serif;
-      font-size: 2rem;
-      color: var(--dark);
-      margin-bottom: 8px;
+      font-size: 2.1rem;
+      font-weight: 800;
+      color: var(--ink);
+      margin-bottom: 10px;
+      letter-spacing: -0.02em;
     }
 
     .result-score-bar-wrap {
-      background: #eee;
+      background: rgba(107, 78, 155, 0.14);
       border-radius: 12px;
-      height: 14px;
-      margin: 18px 0;
+      height: 12px;
+      margin: 20px 0 8px;
       overflow: hidden;
     }
     .result-score-bar {
@@ -241,106 +357,130 @@
     }
 
     .result-score-label {
-      font-size: 0.9rem;
-      color: #999;
-      margin-bottom: 20px;
+      font-size: 0.86rem;
+      color: var(--text-muted);
+      margin-bottom: 22px;
+      font-weight: 500;
     }
 
     .result-description {
       font-size: 1.05rem;
-      color: var(--text);
+      color: var(--text-body);
       line-height: 1.7;
-      max-width: 500px;
+      max-width: 520px;
       margin: 0 auto 28px;
     }
 
-    /* ── Resources ── */
     .resources {
       background: var(--lavender);
-      border-radius: 12px;
-      padding: 24px 28px;
+      border: 1px solid var(--border-soft);
+      border-radius: 14px;
+      padding: 26px 28px;
       text-align: left;
       margin-top: 8px;
     }
     .resources h3 {
       font-family: 'Playfair Display', serif;
       color: var(--purple);
-      font-size: 1.1rem;
-      margin-bottom: 12px;
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 14px;
     }
     .resources ul {
       list-style: none;
       padding: 0;
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 10px;
     }
     .resources li {
       font-size: 0.95rem;
-      color: var(--text);
-      padding-left: 18px;
+      color: var(--text-body);
+      padding-left: 20px;
       position: relative;
+      line-height: 1.55;
     }
     .resources li::before {
       content: "›";
-      color: var(--mint);
+      color: var(--mint-deep);
       font-weight: 700;
+      font-size: 1.1rem;
       position: absolute;
       left: 0;
+      top: -2px;
     }
-    .resources li strong { color: var(--dark); }
+    .resources li strong { color: var(--ink); }
 
     .btn-retake {
       display: inline-block;
-      margin-top: 24px;
-      background: linear-gradient(135deg, var(--purple), var(--soft-purple));
+      margin-top: 28px;
+      background: var(--ink);
       color: #fff;
-      padding: 13px 38px;
+      padding: 13px 40px;
       border-radius: 40px;
-      font-weight: 700;
+      font-weight: 600;
       cursor: pointer;
       border: none;
-      font-family: 'Lato', sans-serif;
-      font-size: 1rem;
-      transition: transform 0.15s;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.98rem;
+      transition: transform 0.15s, background 0.2s, box-shadow 0.2s;
     }
-    .btn-retake:hover { transform: translateY(-3px); }
+    .btn-retake:hover {
+      transform: translateY(-3px);
+      background: var(--purple);
+      box-shadow: 0 10px 22px rgba(107,78,155,0.25);
+    }
 
-    /* ── Footer ── */
+    /* =========== FOOTER =========== */
     .quiz-footer {
-      background: var(--dark);
-      color: rgba(255,255,255,0.55);
+      background: var(--ink);
+      color: rgba(255,255,255,0.6);
       text-align: center;
-      padding: 28px 24px;
-      font-size: 0.85rem;
+      padding: 36px 24px;
+      font-size: 0.88rem;
     }
     .quiz-footer a { color: var(--mint); }
     .quiz-footer a:hover { color: #fff; }
+    .quiz-footer .disclaimer {
+      max-width: 560px;
+      margin: 0 auto 10px;
+      line-height: 1.6;
+    }
 
-    /* ── Responsive ── */
-    @media (max-width: 480px) {
-      .quiz-header h1 { font-size: 2rem; }
-      .question-card  { padding: 24px 20px; }
-      .result-card    { padding: 28px 20px; }
+    @media (max-width: 600px) {
+      .top-nav { padding: 12px 18px; }
+      .top-nav .nav-links { gap: 2px; }
+      .top-nav .nav-links a { padding: 6px 12px; font-size: 0.88rem; }
+      .quiz-header { padding: 60px 20px 55px; }
+      .question-card { padding: 28px 24px; }
+      .result-card { padding: 32px 22px; }
+      .question-text { font-size: 1.25rem; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Header -->
+  <nav class="top-nav">
+    <span class="nav-brand">Celine Harbach</span>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="resume.html">Resume</a></li>
+      <li><a href="scratch.html">My Story</a></li>
+      <li><a href="quiz.html" class="active">Quiz</a></li>
+    </ul>
+  </nav>
+
   <header class="quiz-header">
-    <h1>Mental Wellness Check-In</h1>
+    <span class="eyebrow">Mental Wellness Check-In</span>
+    <h1>How are you, really?</h1>
     <p>
-      10 honest questions. No judgment. A reflection of where you are right now —
-      and a nudge toward what might help.
+      Ten honest questions. No judgment. Just a quick way to pause and check in with yourself.
     </p>
-    <a class="back-link" href="scratch.html">&#8592; Back to More Than Okay</a>
+    <a class="back-link" href="scratch.html">← Back to More Than Okay</a>
   </header>
 
-  <!-- Quiz Container -->
   <div class="quiz-container">
 
-    <!-- Quiz Screen -->
     <div id="quiz-screen">
       <p class="progress-label" id="progress-label">Question 1 of 10</p>
       <div class="progress-wrap">
@@ -358,7 +498,6 @@
       </div>
     </div>
 
-    <!-- Results Screen -->
     <div id="results-screen">
       <div class="result-card">
         <span class="result-emoji" id="result-emoji"></span>
@@ -375,23 +514,20 @@
 
   </div>
 
-  <!-- Footer -->
   <footer class="quiz-footer">
-    <p>
-      This quiz is for self-reflection only and is not a clinical assessment.
-      If you are in crisis, please call or text <strong style="color:#fff;">988</strong> immediately.
+    <p class="disclaimer">
+      This quiz is just for reflection, not a clinical assessment. If you're in crisis, please call or text <strong style="color:#fff;">988</strong>.
     </p>
     <p style="margin-top:8px;">
-      <a href="scratch.html">More Than Okay</a>
+      <a href="index.html">Home</a>
       &nbsp;·&nbsp;
-      <a href="index.html">Celine Harbach Home</a>
+      <a href="resume.html">Resume</a>
+      &nbsp;·&nbsp;
+      <a href="scratch.html">More Than Okay</a>
     </p>
   </footer>
 
   <script>
-    /* ═══════════════════════════════════════════
-       QUIZ DATA
-    ═══════════════════════════════════════════ */
     const questions = [
       {
         text: "Over the past week, how often have you felt genuinely happy or content?",
@@ -414,16 +550,16 @@
       {
         text: "How connected do you feel to the people in your life?",
         options: [
-          { label: "Very connected — I have strong support",      score: 4, emoji: "🤝" },
-          { label: "Pretty good — close to a few people",         score: 3, emoji: "👥" },
-          { label: "A little isolated — not as close as I'd like", score: 2, emoji: "🚶" },
-          { label: "Lonely — I don't feel like anyone really knows me", score: 1, emoji: "😶" }
+          { label: "Very connected, I have strong support",      score: 4, emoji: "🤝" },
+          { label: "Pretty good, close to a few people",         score: 3, emoji: "👥" },
+          { label: "A little isolated, not as close as I'd like", score: 2, emoji: "🚶" },
+          { label: "Lonely, I don't feel like anyone really knows me", score: 1, emoji: "😶" }
         ]
       },
       {
         text: "When stress comes up, how well do you handle it?",
         options: [
-          { label: "I manage it well — I have good coping strategies", score: 4, emoji: "💪" },
+          { label: "I manage it well, I have good coping strategies", score: 4, emoji: "💪" },
           { label: "I get through it, though it's not easy",            score: 3, emoji: "😤" },
           { label: "I often feel overwhelmed",                          score: 2, emoji: "😰" },
           { label: "Stress feels crushing and unmanageable",            score: 1, emoji: "🤯" }
@@ -432,121 +568,111 @@
       {
         text: "How often do you set aside time for things that bring you joy or recharge you?",
         options: [
-          { label: "Regularly — self-care is part of my routine", score: 4, emoji: "🌿" },
-          { label: "Occasionally — when I get around to it",      score: 3, emoji: "☕" },
-          { label: "Rarely — life feels too busy",                score: 2, emoji: "⏰" },
-          { label: "Never — I don't feel like I deserve it",      score: 1, emoji: "😞" }
+          { label: "Regularly, self-care is part of my routine", score: 4, emoji: "🌿" },
+          { label: "Occasionally, when I get around to it",      score: 3, emoji: "☕" },
+          { label: "Rarely, life feels too busy",                score: 2, emoji: "⏰" },
+          { label: "Never, I don't feel like I deserve it",      score: 1, emoji: "😞" }
         ]
       },
       {
         text: "How often do you feel overwhelmed by everyday responsibilities?",
         options: [
-          { label: "Rarely — I feel on top of things",         score: 4, emoji: "✅" },
-          { label: "Sometimes — but I recover quickly",        score: 3, emoji: "😌" },
-          { label: "Often — the to-do list never ends",        score: 2, emoji: "📋" },
-          { label: "Almost always — everything feels too much", score: 1, emoji: "😩" }
+          { label: "Rarely, I feel on top of things",         score: 4, emoji: "✅" },
+          { label: "Sometimes, but I recover quickly",        score: 3, emoji: "😌" },
+          { label: "Often, the to-do list never ends",        score: 2, emoji: "📋" },
+          { label: "Almost always, everything feels too much", score: 1, emoji: "😩" }
         ]
       },
       {
         text: "How comfortable do you feel talking about your emotions or mental health?",
         options: [
-          { label: "Very comfortable — I'm open about it",        score: 4, emoji: "💬" },
+          { label: "Very comfortable, I'm open about it",        score: 4, emoji: "💬" },
           { label: "Somewhat comfortable with trusted people",     score: 3, emoji: "🗣️" },
-          { label: "Uncomfortable — I tend to keep things in",     score: 2, emoji: "🤐" },
-          { label: "Very uncomfortable — mental health feels taboo", score: 1, emoji: "😶‍🌫️" }
+          { label: "Uncomfortable, I tend to keep things in",     score: 2, emoji: "🤐" },
+          { label: "Very uncomfortable, mental health feels taboo", score: 1, emoji: "😶‍🌫️" }
         ]
       },
       {
         text: "How motivated do you feel to get through your day-to-day life?",
         options: [
-          { label: "Very motivated — I have a clear sense of purpose", score: 4, emoji: "🚀" },
-          { label: "Generally okay — some days more than others",      score: 3, emoji: "👍" },
-          { label: "Low motivation — hard to get started",             score: 2, emoji: "🐌" },
-          { label: "Barely any motivation — things feel pointless",    score: 1, emoji: "🌑" }
+          { label: "Very motivated, I have a clear sense of purpose", score: 4, emoji: "🚀" },
+          { label: "Generally okay, some days more than others",      score: 3, emoji: "👍" },
+          { label: "Low motivation, hard to get started",             score: 2, emoji: "🐌" },
+          { label: "Barely any motivation, things feel pointless",    score: 1, emoji: "🌑" }
         ]
       },
       {
         text: "Do you have people you can genuinely turn to when things get hard?",
         options: [
-          { label: "Yes — several trusted people",         score: 4, emoji: "❤️" },
+          { label: "Yes, several trusted people",         score: 4, emoji: "❤️" },
           { label: "One or two people I can lean on",      score: 3, emoji: "🫂" },
-          { label: "Not really — I mostly handle things alone", score: 2, emoji: "🧍" },
-          { label: "No — I feel like I'm completely on my own", score: 1, emoji: "🏝️" }
+          { label: "Not really, I mostly handle things alone", score: 2, emoji: "🧍" },
+          { label: "No, I feel like I'm completely on my own", score: 1, emoji: "🏝️" }
         ]
       },
       {
         text: "If you had to rate your overall mental wellbeing right now, honestly, where are you?",
         options: [
-          { label: "Thriving — genuinely doing well",             score: 4, emoji: "🌟" },
-          { label: "Managing — getting by, could be better",      score: 3, emoji: "🌤️" },
-          { label: "Struggling — things are hard right now",      score: 2, emoji: "🌧️" },
-          { label: "In a really dark place — I need support",     score: 1, emoji: "⛈️" }
+          { label: "Thriving, genuinely doing well",             score: 4, emoji: "🌟" },
+          { label: "Managing, getting by, could be better",      score: 3, emoji: "🌤️" },
+          { label: "Struggling, things are hard right now",      score: 2, emoji: "🌧️" },
+          { label: "In a really dark place, I need support",     score: 1, emoji: "⛈️" }
         ]
       }
     ];
 
-    /* ═══════════════════════════════════════════
-       RESULTS DATA
-    ═══════════════════════════════════════════ */
     const results = [
       {
         minScore: 35, maxScore: 40,
         emoji: "🌟",
         title: "You're Thriving",
-        description: `Your responses suggest you're in a genuinely good place mentally and emotionally. You have strong support, healthy habits, and a real sense of purpose. That's something to appreciate — and protect. Keep investing in what's working.`,
+        description: `Your answers say you're in a really good spot right now. You've got support, healthy habits, and a sense of where you're headed. That's worth protecting. Keep doing what's working.`,
         resources: [
-          { label: "Keep it going", text: "Share this quiz with someone who might benefit from a check-in." },
-          { label: "Grow your toolkit", text: "Explore mindfulness apps like Headspace or Calm to deepen your wellbeing practice." },
-          { label: "Give back", text: "Consider volunteering with NAMI — people doing well are powerful advocates for others." }
+          { label: "Keep it going", text: "Share this quiz with someone who might need a nudge to check in." },
+          { label: "Grow your toolkit", text: "Apps like Headspace or Calm can keep your practice steady." },
+          { label: "Give back", text: "Volunteer with NAMI, people doing well are some of the best advocates." }
         ]
       },
       {
         minScore: 27, maxScore: 34,
         emoji: "🌤️",
         title: "You're Managing Well",
-        description: `You're doing okay — some days are harder than others, but you're generally holding things together. There's room to build more support around yourself, and you deserve more than just "getting by." Small, intentional changes can make a real difference.`,
+        description: `You're doing okay. Some days are easier than others, but you're holding things together. There's still room to build a little more support around yourself, you deserve more than just getting by.`,
         resources: [
-          { label: "NAMI Connection", text: "Free support groups for adults living with mental health conditions — nami.org/Support-Education/Support-Groups" },
-          { label: "Woebot", text: "A free AI-powered mental health chatbot grounded in CBT — woebot.io" },
-          { label: "Therapy matching", text: "BetterHelp or Open Path Collective offers affordable therapy — openpathcollective.org" }
+          { label: "NAMI Connection", text: "Free support groups at nami.org/Support-Education/Support-Groups" },
+          { label: "Woebot", text: "A free CBT-based chatbot, woebot.io" },
+          { label: "Therapy matching", text: "BetterHelp or Open Path Collective for affordable therapy, openpathcollective.org" }
         ]
       },
       {
         minScore: 18, maxScore: 26,
         emoji: "🌧️",
-        title: "You're Struggling — and That's Okay",
-        description: `Your answers suggest you're going through something hard right now. Feeling this way doesn't mean something is broken with you — it means you're human, and you might need a little extra support right now. You don't have to figure it out alone.`,
+        title: "You're Struggling, and That's Okay",
+        description: `It sounds like things are hard right now. Feeling this way doesn't mean anything is wrong with you, it just means you're human and could use a little extra support. You don't have to figure this out alone.`,
         resources: [
-          { label: "988 Suicide & Crisis Lifeline", text: "Call or text 988 anytime — trained counselors available 24/7." },
-          { label: "Crisis Text Line", text: "Text HOME to 741741 to connect with a crisis counselor." },
-          { label: "Find a therapist", text: "Psychology Today's directory can help you find someone in your area — psychologytoday.com/us/therapists" },
-          { label: "NAMI Helpline", text: "Call 1-800-950-NAMI (6264) — Mon–Fri, 10am–10pm ET." }
+          { label: "988 Suicide & Crisis Lifeline", text: "Call or text 988 anytime. Real people, 24/7." },
+          { label: "Crisis Text Line", text: "Text HOME to 741741 to talk to a crisis counselor." },
+          { label: "Find a therapist", text: "Psychology Today's directory can help, psychologytoday.com/us/therapists" },
+          { label: "NAMI Helpline", text: "Call 1-800-950-NAMI (6264), Mon–Fri, 10am–10pm ET." }
         ]
       },
       {
         minScore: 10, maxScore: 17,
         emoji: "🫂",
-        title: "Please Reach Out — You Deserve Support",
-        description: `You answered honestly, and that took courage. Right now, things sound really heavy — and you deserve real support, not just to push through. Please don't face this alone. The resources below are free, confidential, and there for exactly this moment.`,
+        title: "Please Reach Out, You Deserve Support",
+        description: `Thank you for being honest. It sounds really heavy right now, and you don't have to push through this alone. The resources below are free, confidential, and made for exactly this moment.`,
         resources: [
-          { label: "988 Suicide & Crisis Lifeline", text: "CALL OR TEXT 988 RIGHT NOW. Free, confidential, 24/7." },
-          { label: "Crisis Text Line", text: "Text HOME to 741741. A real person will respond within minutes." },
-          { label: "NAMI Helpline", text: "1-800-950-NAMI (6264) — peer support from people who've been there." },
-          { label: "You are not alone", text: "Visit nami.org or twloha.com for stories from others who felt exactly where you are." }
+          { label: "988 Suicide & Crisis Lifeline", text: "Call or text 988 right now. Free, confidential, 24/7." },
+          { label: "Crisis Text Line", text: "Text HOME to 741741. A real person will answer within minutes." },
+          { label: "NAMI Helpline", text: "1-800-950-NAMI (6264), peer support from people who've been there." },
+          { label: "You are not alone", text: "Visit nami.org or twloha.com for stories from people who've felt this too." }
         ]
       }
     ];
 
-    /* ═══════════════════════════════════════════
-       STATE
-    ═══════════════════════════════════════════ */
     let currentIndex = 0;
     let answers = new Array(questions.length).fill(null);
-    let selectedOption = null;
 
-    /* ═══════════════════════════════════════════
-       RENDER QUESTION
-    ═══════════════════════════════════════════ */
     function renderQuestion() {
       const q = questions[currentIndex];
       const total = questions.length;
@@ -558,7 +684,6 @@
       const pct = ((currentIndex) / total) * 100;
       document.getElementById('progress-bar').style.width = pct + '%';
 
-      // Rebuild options
       const ul = document.getElementById('options-list');
       ul.innerHTML = '';
       q.options.forEach((opt, i) => {
@@ -572,18 +697,15 @@
         ul.appendChild(li);
       });
 
-      // Next button state
       const nextBtn = document.getElementById('btn-next');
       nextBtn.textContent = currentIndex === total - 1 ? 'See My Results ✓' : 'Next →';
       nextBtn.disabled = answers[currentIndex] === null;
 
-      // Back button
       document.getElementById('btn-back').style.display = currentIndex > 0 ? 'inline-block' : 'none';
 
-      // Animate card
       const card = document.getElementById('question-card');
       card.style.animation = 'none';
-      void card.offsetWidth; // reflow
+      void card.offsetWidth;
       card.style.animation = 'fadeUp 0.4s ease both';
     }
 
@@ -611,21 +733,15 @@
       }
     }
 
-    /* ═══════════════════════════════════════════
-       SHOW RESULTS
-    ═══════════════════════════════════════════ */
     function showResults() {
-      // Calculate score
       const totalScore = answers.reduce((sum, answerIndex, qIdx) => {
         if (answerIndex === null) return sum;
         return sum + questions[qIdx].options[answerIndex].score;
       }, 0);
 
-      // Find result tier
       const tier = results.find(r => totalScore >= r.minScore && totalScore <= r.maxScore)
                    || results[results.length - 1];
 
-      // Hide quiz, show results
       document.getElementById('quiz-screen').style.display    = 'none';
       document.getElementById('results-screen').style.display = 'block';
 
@@ -635,27 +751,21 @@
       document.getElementById('result-score-label').textContent =
         `Your score: ${totalScore} / ${questions.length * 4}`;
 
-      // Animate score bar
       const pct = Math.round((totalScore / (questions.length * 4)) * 100);
       setTimeout(() => {
         document.getElementById('result-score-bar').style.width = pct + '%';
       }, 200);
 
-      // Resources
       const resDiv = document.getElementById('resources-section');
       resDiv.innerHTML = `<h3>Resources for You</h3><ul>${
         tier.resources.map(r =>
-          `<li><strong>${r.label}</strong> — ${r.text}</li>`
+          `<li><strong>${r.label}</strong>, ${r.text}</li>`
         ).join('')
       }</ul>`;
 
-      // Scroll to results
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    /* ═══════════════════════════════════════════
-       RESTART
-    ═══════════════════════════════════════════ */
     function restartQuiz() {
       currentIndex = 0;
       answers = new Array(questions.length).fill(null);
@@ -666,7 +776,6 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    /* ── Init ── */
     renderQuestion();
   </script>
 </body>
